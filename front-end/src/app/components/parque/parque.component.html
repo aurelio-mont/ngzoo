@@ -1,0 +1,19 @@
+<h2> {{name}} </h2>
+<ol>
+	<li>
+		Metros: {{metros}}
+	</li>
+	<li>
+		Vegetacion: {{vegetacion}}
+	</li>
+	<li>
+		<span *ngIf="abierto">
+			Esta abierto!
+		</span>
+		<span *ngIf="!abierto">
+			Esta cerrado!
+		</span>
+	</li>
+</ol>
+
+<button (click)="emitirEvento()">Mostrar en el padre</button>
