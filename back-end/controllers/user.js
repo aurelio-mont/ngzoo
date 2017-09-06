@@ -1,6 +1,7 @@
 'use strict'
 //modulos
 var bcrypt = require('bcrypt-nodejs')
+var fs = require('fs')
 
 //modelos
 var User = require('../models/user')
@@ -128,10 +129,62 @@ function updateUser(req, res) {
 }
 
 function uploadUserAvatar(req, res) {
-	res.status(200).send({
-		message: 'Actualizar Avatar de Usuario',
-		user: req.user
-	})
+	var userId = req.params.id
+	
+	var file_name = 'No subido...'
+	
+	if (req.files) {
+		var file_path = req.files.image.path
+		var file_split = file_path.split('/')
+		var file_name = file_split[2]
+		var exp_split = file_name.split('\.')
+		var file_ext = exp_split[1]
+
+		if (file_ext == 'png' || file_ext == 'jpg' || file_ext == 'jpeg' || file_ext == 'gif' ) {
+			if (userId != req.user.sub) {
+					res.status(500).send({
+					message: 'Acceo denegado!'
+				})
+			}
+			User.findByIdAndUpdate(userId, {image: file_name}, {new: true}, (err, UserUpdated) => {
+				if (err) {
+					fs.unlink(file_path, (err) => {
+						if (err) {
+							res.status(403).send({ message: 'Error al actualizar usauario y archivo no eliminado!'})
+						} else {
+							res.status(403).send({ message: 'Error al actualizar usauario usauario!'})
+						}
+					})
+				} else {
+					if (!UserUpdated) {
+						fs.unlink(file_path, (err) => {
+							if (err) {
+								res.status(403).send({ message: 'Error no se ha podido actualizar usauario y archivo no eliminado!'})
+							} else {
+								res.status(403).send({ message: 'Error no se ha podido actualizar usauario!'})
+							}
+						})
+					} else {
+						res.status(200).send({ 
+							message: 'Usuario actualizado!',
+							user: UserUpdated
+						})
+					}
+				}
+			})
+		} else {
+			fs.unlink(file_path, (err) => {
+				if (err) {
+					res.status(403).send({ message: 'extencion no valida y archivo no eliminado!'})
+				} else {
+					res.status(403).send({ message: 'extencion no valida!'})
+				}
+			})
+			
+		}			
+	} else {
+		res.status(403).send({ message: 'No se han subido archivos!'})
+	}
 }
 
 module.exports = {
