@@ -1,4 +1,5 @@
 'use strict'
+
 var mongoose = require('mongoose')
 var Schema = mongoose.Schema
 
@@ -7,9 +8,9 @@ var AnimalSchema = Schema({
 	description: String,
 	year: Number,
 	image: String,
-	user: {
-		type: Schema.ObjetId,
-		ref: 'User'
+	user: { 
+		type: Schema.ObjectId, 
+		ref: 'User' 
 	}
 })
 
