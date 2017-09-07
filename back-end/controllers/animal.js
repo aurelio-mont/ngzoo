@@ -45,12 +45,24 @@ function saveAnimal(req, res) {
 			message: 'No se recibio el nombre del animal'
 		})
 	}
+}
 
-
-	
+function getAnimals(req, res) {
+	Animal.find({}).populate({path: 'user'}).exec((err, animals) => {
+		if (err) {
+			res.status(500).send({message: 'error buscar registros'})
+		}else{
+			if (!animals) {
+				res.status(404).send({message: 'No existen animals'})
+			}else{
+				res.status(200).send({animals: animals})
+			}
+		}
+	})
 }
 
 module.exports = {
 	pruebas,
-	saveAnimal
+	saveAnimal,
+	getAnimals
 }
