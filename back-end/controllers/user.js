@@ -200,7 +200,20 @@ function getAvatarFile(req, res) {
 			res.status(404).send({ message: 'la imagen no existe'})
 		}
 	})
+}
 
+function getKeepers(req, res) {
+	User.find({role: 'ROLE_ADMIN'}).exec((err, users) => {
+		if (err) {
+			res.status(500).send({ message: 'Error del servidor'})
+		} else {
+			if (!users) {
+				res.status(404).send({ message: 'No hay Cuidadores'})
+			}else {
+				res.status(200).send({users})
+			}
+		}
+	})
 	
 }
 
@@ -210,5 +223,6 @@ module.exports = {
 	loginUser,
 	updateUser,
 	uploadUserAvatar,
-	getAvatarFile
+	getAvatarFile,
+	getKeepers
 }
