@@ -3,32 +3,33 @@
     <form #registerForm="ngForm" (ngSubmit)="onSubmit()" class="col-lg 10">
         <p>
             <label for="name">Nombre</label>
-            <input type="text" name="name" #name="ngModel" id="name" [(ngModel)]="user.name"   class="form-control" required>
-            <span *ngIf="!name.valid && name.touched" >
+            <input type="text" name="name" #name="ngModel" id="name" [(ngModel)]="user.name" class="form-control" required>
+            <span *ngIf="!name.valid && name.touched">
                 El Nombre es obligatorio
             </span>
         </p>
         <p>
             <label for="surname">Apellidos</label>
             <input type="text" #surname="ngModel" [(ngModel)]="user.surname" name="surname" id="surname" class="form-control" required>
-            <span *ngIf="!surname.valid && surname.touched" >
+            <span *ngIf="!surname.valid && surname.touched">
                 Los Apellidos son obligatorios
             </span>
         </p>
         <p>
             <label for="email">Correo Electronico</label>
             <input type="email" #email="ngModel" [(ngModel)]="user.email" name="email" id="email" class="form-control" required>
-            <span *ngIf="!email.valid && email.touched" >
+            <span *ngIf="!email.valid && email.touched">
                 El email es obligatorio
             </span>
         </p>
         <p>
             <label for="password">Contraseña</label>
-            <input type="password" #password="ngModel" [(ngModel)]="user.password" name="password" id="password" class="form-control" required>
-            <span *ngIf="!password.valid && password.touched" >
+            <input type="password" #password="ngModel" [(ngModel)]="user.password" name="password" id="password" class="form-control"
+                required>
+            <span *ngIf="!password.valid && password.touched">
                 La contraseña es obligatoria
             </span>
         </p>
-        <input type="submit" value="{{title}}" class="btn btn-primary">
+        <input type="submit" value="{{title}}" class="btn btn-primary" [disabled]="!registerForm.form.valid" >
     </form>
 </div>
