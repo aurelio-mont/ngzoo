@@ -7,6 +7,9 @@ import { ContactComponent } from './components/contact/contact.component';
 import { HomeComponent } from './components/home/home.component';
 import { KeeperComponent } from './components/keeper/keeper.component';
 import { TiendaComponent } from './components/tienda/tienda.component';
+import { RegisterComponent } from './components/register/register.component';
+import { LoginComponent } from './components/login/login.component';
+
 
 const appRoutes: Routes = [
 	{
@@ -37,6 +40,14 @@ const appRoutes: Routes = [
 	{
 		path: 'tienda',
 		component: TiendaComponent
+	},
+	{
+		path: 'registro',
+		component: RegisterComponent
+	},
+	{
+		path: 'login',
+		component: LoginComponent
 	},
 	{
 		path: '**',

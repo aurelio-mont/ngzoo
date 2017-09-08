@@ -7,10 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./animals.component.css']
 })
 export class AnimalsComponent implements OnInit {
-	public title: string;
+	public title: string
 
   	constructor(){
-  		this.title = 'Animals 0.0.1';
+  		this.title = 'Animals 0.0.1'
   	}
 
   	ngOnInit(){
