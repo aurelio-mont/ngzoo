@@ -16,8 +16,9 @@ import { UserService } from '../../services/user.service';
 })
 
 export class RegisterComponent implements OnInit {
-    public title: String;
-    public user: User;
+    public title: string
+    public user: User
+    public status: string
 
     constructor(private _route: ActivatedRoute, _router: Router,private _userService: UserService ) {
         this.title = 'Registro'
@@ -26,10 +27,23 @@ export class RegisterComponent implements OnInit {
 
     ngOnInit(){
         console.log('register.component loaded...')
-        console.log(this._userService.reister())
     }
 
-    onSubmit(){
-        console.log(this.user)
+    onSubmit(registerForm){
+        this._userService.reister(this.user).subscribe(
+            response => {
+                if (response.user && response.user._id) {
+                    this.status = 'sucess'
+                    this.user = new User('','','','','','ROLE_USER','')
+                    registerForm.reset()
+                }
+                else {
+                    this.status = 'error'
+                }
+            },
+            error =>{
+                console.log(<any> error)
+            }
+        )
     }
 }

@@ -57,7 +57,7 @@ function registroUser(req, res) {
 
 					})
 				} else {
-					res.status(404).send({message: 'Usuario duplicado'})
+					res.status(200).send({message: 'Usuario duplicado'})
 				}
 			}
 		})
