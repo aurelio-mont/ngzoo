@@ -6,54 +6,75 @@
 			</div>
 			<ul class="nav navbar-nav">
 				<li>
-					<a [routerLink]="['/home']" [routerLinkActive]="['active']" >
+					<a [routerLink]="['/home']" [routerLinkActive]="['active']">
 						<span class="glyphicon glyphicon-home"></span>
 						Inicio
 					</a>
 				</li>
 				<li>
-					<a [routerLink]="['/animals']" [routerLinkActive]="['active']" >
+					<a [routerLink]="['/animals']" [routerLinkActive]="['active']">
 						<span class="glyphicon glyphicon-star"></span>
 						Animales
 					</a>
 				</li>
 				<li>
-					<a [routerLink]="['/keeper']" [routerLinkActive]="['active']" >
+					<a [routerLink]="['/keeper']" [routerLinkActive]="['active']">
 						<span class="glyphicon glyphicon-user"></span>
 						Cuidadores
 					</a>
 				</li>
 				<li>
-					<a [routerLink]="['/tienda']" [routerLinkActive]="['active']" >
+					<a [routerLink]="['/tienda']" [routerLinkActive]="['active']">
 						<span class="glyphicon glyphicon-gift"></span>
 						Tienda
 					</a>
 				</li>
 				<li>
-					<a [routerLink]="['/contact']" [routerLinkActive]="['active']" >
+					<a [routerLink]="['/contact']" [routerLinkActive]="['active']">
 						<span class="glyphicon glyphicon-comment"></span>
 						Contacto
 					</a>
 				</li>
 				<li class="hidden">
-					<span *ngIf="emailcontacto" >
+					<span *ngIf="emailcontacto">
 						<strong>Email de cotacto: </strong>{{emailcontacto}}
 						<button (click)="eliminarEmail()" >Eliminar email</button>
 					</span>
 				</li>
 			</ul>
-			<ul class="nav navbar-nav navbar-right">
+			<ul class="nav navbar-nav navbar-right" *ngIf="!identity">
 				<li>
-					<a [routerLink]="['/registro']" [routerLinkActive]="['active']" >
+					<a [routerLink]="['/registro']" [routerLinkActive]="['active']">
 						<span class="glyphicon glyphicon-user"></span>
 						Registro
 					</a>
 				</li>
 				<li>
-					<a [routerLink]="['/login']" [routerLinkActive]="['active']" >
+					<a [routerLink]="['/login']" [routerLinkActive]="['active']">
 						<span class="glyphicon glyphicon-log-in"></span>
 						Ingresar
 					</a>
+				</li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right" *ngIf="identity">
+				<li class="dropdown">
+					<a class="dropdown*toggle" data-toggle="dropdown" href="#">
+							{{identity.name}} <span class="caret"></span>
+						</a>
+					<ul class="dropdown-menu">
+						<li>
+							<a href="#">
+									<span class="glyphicon glyphicon-cog"></span>
+									Mis datos
+								</a>
+						</li>
+						<li>
+							<a class="pointer" (click)="logout()" >
+								<span class="glyphicon glyphicon-log-out"></span>
+								Salir
+							</a>
+						</li>
+					</ul>
 				</li>
 			</ul>
 		</div>

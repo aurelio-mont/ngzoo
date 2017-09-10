@@ -23,15 +23,14 @@
         </p>
         <p>
             <label for="email">Correo Electronico</label>
-            <input type="email" #email="ngModel" [(ngModel)]="user.email" name="email" id="email" class="form-control" required>
+            <input type="email" #email="ngModel" [(ngModel)]="user.email" name="email" id="email" class="form-control" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$" required>
             <span *ngIf="!email.valid && email.touched">
                 El email es obligatorio
             </span>
         </p>
         <p>
             <label for="password">Contraseña</label>
-            <input type="password" #password="ngModel" [(ngModel)]="user.password" name="password" id="password" class="form-control"
-                required>
+            <input type="password" #password="ngModel" [(ngModel)]="user.password" name="password" id="password" class="form-control" required>
             <span *ngIf="!password.valid && password.touched">
                 La contraseña es obligatoria
             </span>

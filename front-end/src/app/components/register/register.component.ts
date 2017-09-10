@@ -20,7 +20,7 @@ export class RegisterComponent implements OnInit {
     public user: User
     public status: string
 
-    constructor(private _route: ActivatedRoute, _router: Router,private _userService: UserService ) {
+    constructor(private _route: ActivatedRoute, _router: Router, private _userService: UserService ) {
         this.title = 'Registro'
         this.user = new User('','','','','','ROLE_USER','');
     }
